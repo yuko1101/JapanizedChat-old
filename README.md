@@ -1,0 +1,2 @@
+# JapanizedChat
+HypixelでのParty Chatのローマ字を自動で日本語に変換して読みやすくしてくれるForge Modです
