@@ -30,7 +30,7 @@ class Asterium {
 
     companion object {
         const val MODID = "JapanizedChat"
-        const val VERSION = "1.0.0"
+        const val VERSION = "0.1.0"
     }
 
     @SubscribeEvent
