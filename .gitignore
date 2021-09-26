@@ -2,6 +2,7 @@
 /build/
 build.gradle
 /lib/
+/run/
 
 # Ignore Gradle GUI config
 gradle-app.setting
