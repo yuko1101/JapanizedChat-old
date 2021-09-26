@@ -37,7 +37,7 @@ class Asterium {
     fun onChat(event: ClientChatReceivedEvent) {
 //            println("> [Chat] ${event.message.formattedText}")
         val text: String = event.message.formattedText
-        if (text.startsWith(EnumChatFormatting.RESET.toString() + "" + EnumChatFormatting.DARK_AQUA + "Officer >") || text.startsWith(
+        if (/*text.startsWith(EnumChatFormatting.RESET.toString() + "" + EnumChatFormatting.DARK_AQUA + "Officer >") || */text.startsWith(
                 EnumChatFormatting.RESET.toString() + "" + EnumChatFormatting.BLUE + "Party " + EnumChatFormatting.DARK_GRAY + ">")) {
             if (text.contains("://")) return
             if (!EnumChatFormatting.getTextWithoutFormattingCodes(text).all { c -> c.toString().toByteArray().size <= 1 }) return
