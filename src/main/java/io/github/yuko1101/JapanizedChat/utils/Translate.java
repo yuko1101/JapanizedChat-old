@@ -1,4 +1,4 @@
-package net.asterium.utils;
+package io.github.yuko1101.JapanizedChat.utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,7 +8,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Arrays;
 
-import net.asterium.utils.ChatLib;
 import net.minecraft.util.EnumChatFormatting;
 
 public class Translate implements Runnable {

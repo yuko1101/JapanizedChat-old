@@ -1,6 +1,8 @@
-package net.asterium
+package io.github.yuko1101.JapanizedChat
 
-import net.asterium.utils.Translate
+import gg.essential.api.EssentialAPI
+import io.github.yuko1101.JapanizedChat.commands.MainCommand
+import io.github.yuko1101.JapanizedChat.utils.Translate
 import net.minecraft.client.Minecraft
 import net.minecraft.util.EnumChatFormatting
 import net.minecraftforge.client.event.ClientChatReceivedEvent
@@ -16,10 +18,12 @@ class Asterium {
     private val mc: Minecraft = Minecraft.getMinecraft()
 
 
-
     @Mod.EventHandler
     fun init(event: FMLInitializationEvent) {
+        config.initialize()
+
         MinecraftForge.EVENT_BUS.register(this)
+        EssentialAPI.getCommandRegistry().registerCommand(MainCommand())
     }
 
     @Mod.EventHandler
@@ -31,11 +35,14 @@ class Asterium {
     companion object {
         const val MODID = "JapanizedChat"
         const val VERSION = "0.1.0"
+        val config = Config
+
     }
 
     @SubscribeEvent
     fun onChat(event: ClientChatReceivedEvent) {
 //            println("> [Chat] ${event.message.formattedText}")
+        if (!config.isEnabled) return
         val text: String = event.message.formattedText
         if (/*text.startsWith(EnumChatFormatting.RESET.toString() + "" + EnumChatFormatting.DARK_AQUA + "Officer >") || */text.startsWith(
                 EnumChatFormatting.RESET.toString() + "" + EnumChatFormatting.BLUE + "Party " + EnumChatFormatting.DARK_GRAY + ">")) {

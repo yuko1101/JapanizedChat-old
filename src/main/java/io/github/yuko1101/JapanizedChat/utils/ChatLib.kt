@@ -1,4 +1,4 @@
-package net.asterium.utils
+package io.github.yuko1101.JapanizedChat.utils
 
 import net.minecraft.client.Minecraft
 import net.minecraft.util.ChatComponentText

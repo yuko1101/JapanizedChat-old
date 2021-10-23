@@ -5,11 +5,11 @@
   "description": "JapanizedChat for Minecraft Forge 1.8.9",
   "version": "${version}",
   "mcversion": "${mcversion}",
-  "url": "",
+  "url": "https://github.com/yuko1101/JapanizedChat",
   "updateUrl": "",
   "authorList": ["yuko1101"],
   "credits": "The Forge and FML guys, for making this example",
-  "logoFile": "",
+  "logoFile": "assets/JapanizedChat/icon.png",
   "screenshots": [],
   "dependencies": []
 }
