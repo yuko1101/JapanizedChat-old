@@ -1,595 +1,561 @@
-package io.github.yuko1101.JapanizedChat.utils;
+package io.github.yuko1101.JapanizedChat.utils
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.Arrays;
+import net.minecraft.util.EnumChatFormatting
+import java.io.BufferedReader
+import java.io.IOException
+import java.io.InputStreamReader
+import java.net.HttpURLConnection
+import java.net.URL
+import java.net.URLEncoder
+import java.util.*
 
-import net.minecraft.util.EnumChatFormatting;
+object Translate {
 
-public class Translate implements Runnable {
-    String str;
-    String mode;
-    //private static final String SOCIAL_IME_URL = "http://www.social-ime.com/api/?string=";
-    //private static final String GOOGLE_IME_URL = "http://www.google.com/transliterate?langpair=ja-Hira|ja&text=";
-
-    public Translate(String msg, String mode) {
-        this.str = msg;
-        this.mode = mode;
+    fun toKana(msg: String): String {
+        var kana = msg
+        kana = kana.replace("nn".toRegex(), "ん")
+        kana = kana.replace("wwha".toRegex(), "っうぁ")
+        kana = kana.replace("wwhi".toRegex(), "っうぃ")
+        kana = kana.replace("wwhu".toRegex(), "っう")
+        kana = kana.replace("wwhe".toRegex(), "っうぇ")
+        kana = kana.replace("wwho".toRegex(), "っうぉ")
+        kana = kana.replace("wwyi".toRegex(), "っゐ")
+        kana = kana.replace("wwye".toRegex(), "っゑ")
+        kana = kana.replace("xxa".toRegex(), "っぁ")
+        kana = kana.replace("xxi".toRegex(), "っぃ")
+        kana = kana.replace("xxu".toRegex(), "っぅ")
+        kana = kana.replace("xxe".toRegex(), "っぇ")
+        kana = kana.replace("xxo".toRegex(), "っぉ")
+        kana = kana.replace("xxya".toRegex(), "っゃ")
+        kana = kana.replace("xxyu".toRegex(), "っゅ")
+        kana = kana.replace("xxyo".toRegex(), "っょ")
+        kana = kana.replace("xxtu".toRegex(), "っっ")
+        kana = kana.replace("lla".toRegex(), "っぁ")
+        kana = kana.replace("lli".toRegex(), "っぃ")
+        kana = kana.replace("llu".toRegex(), "っぅ")
+        kana = kana.replace("lle".toRegex(), "っぇ")
+        kana = kana.replace("llo".toRegex(), "っぉ")
+        kana = kana.replace("llya".toRegex(), "っゃ")
+        kana = kana.replace("llyu".toRegex(), "っゅ")
+        kana = kana.replace("llyo".toRegex(), "っょ")
+        kana = kana.replace("lltu".toRegex(), "っっ")
+        kana = kana.replace("kka".toRegex(), "っか")
+        kana = kana.replace("kki".toRegex(), "っき")
+        kana = kana.replace("kku".toRegex(), "っく")
+        kana = kana.replace("kke".toRegex(), "っけ")
+        kana = kana.replace("kko".toRegex(), "っこ")
+        kana = kana.replace("kkya".toRegex(), "っきゃ")
+        kana = kana.replace("kkyi".toRegex(), "っきぃ")
+        kana = kana.replace("kkyu".toRegex(), "っきゅ")
+        kana = kana.replace("kkye".toRegex(), "っきぇ")
+        kana = kana.replace("kkyo".toRegex(), "っきょ")
+        kana = kana.replace("gga".toRegex(), "っが")
+        kana = kana.replace("ggi".toRegex(), "っぎ")
+        kana = kana.replace("ggu".toRegex(), "っぐ")
+        kana = kana.replace("gge".toRegex(), "っげ")
+        kana = kana.replace("ggo".toRegex(), "っご")
+        kana = kana.replace("ggya".toRegex(), "っぎゃ")
+        kana = kana.replace("ggyi".toRegex(), "っぎぃ")
+        kana = kana.replace("ggyu".toRegex(), "っぎゅ")
+        kana = kana.replace("ggye".toRegex(), "っぎぇ")
+        kana = kana.replace("ggyo".toRegex(), "っぎょ")
+        kana = kana.replace("ttsa".toRegex(), "っつぁ")
+        kana = kana.replace("ttsi".toRegex(), "っつぃ")
+        kana = kana.replace("ttsu".toRegex(), "っつ")
+        kana = kana.replace("ttse".toRegex(), "っつぇ")
+        kana = kana.replace("ttso".toRegex(), "っつぉ")
+        kana = kana.replace("ssa".toRegex(), "っさ")
+        kana = kana.replace("ssi".toRegex(), "っし")
+        kana = kana.replace("ssu".toRegex(), "っす")
+        kana = kana.replace("sse".toRegex(), "っせ")
+        kana = kana.replace("sso".toRegex(), "っそ")
+        kana = kana.replace("cca".toRegex(), "っか")
+        kana = kana.replace("cci".toRegex(), "っし")
+        kana = kana.replace("ccu".toRegex(), "っく")
+        kana = kana.replace("cce".toRegex(), "っせ")
+        kana = kana.replace("cco".toRegex(), "っこ")
+        kana = kana.replace("ssha".toRegex(), "っしゃ")
+        kana = kana.replace("sshi".toRegex(), "っし")
+        kana = kana.replace("sshu".toRegex(), "っしゅ")
+        kana = kana.replace("sshe".toRegex(), "っしぇ")
+        kana = kana.replace("ssho".toRegex(), "っしょ")
+        kana = kana.replace("ssya".toRegex(), "っしゃ")
+        kana = kana.replace("ssyi".toRegex(), "っしぃ")
+        kana = kana.replace("ssyu".toRegex(), "っしゅ")
+        kana = kana.replace("ssye".toRegex(), "っしぇ")
+        kana = kana.replace("ssyo".toRegex(), "っしょ")
+        kana = kana.replace("zza".toRegex(), "っざ")
+        kana = kana.replace("zzi".toRegex(), "っじ")
+        kana = kana.replace("zzu".toRegex(), "っず")
+        kana = kana.replace("zze".toRegex(), "っぜ")
+        kana = kana.replace("zzo".toRegex(), "っぞ")
+        kana = kana.replace("jja".toRegex(), "っじゃ")
+        kana = kana.replace("jji".toRegex(), "っじ")
+        kana = kana.replace("jju".toRegex(), "っじゅ")
+        kana = kana.replace("jje".toRegex(), "っじぇ")
+        kana = kana.replace("jjo".toRegex(), "っじょ")
+        kana = kana.replace("jjya".toRegex(), "っじゃ")
+        kana = kana.replace("jjyi".toRegex(), "っじぃ")
+        kana = kana.replace("jjyu".toRegex(), "っじゅ")
+        kana = kana.replace("jjye".toRegex(), "っじぇ")
+        kana = kana.replace("jjyo".toRegex(), "っじょ")
+        kana = kana.replace("zzya".toRegex(), "っじゃ")
+        kana = kana.replace("zzyi".toRegex(), "っじぃ")
+        kana = kana.replace("zzyu".toRegex(), "っじゅ")
+        kana = kana.replace("zzye".toRegex(), "っじぇ")
+        kana = kana.replace("zzyo".toRegex(), "っじょ")
+        kana = kana.replace("tta".toRegex(), "った")
+        kana = kana.replace("tti".toRegex(), "っち")
+        kana = kana.replace("ttu".toRegex(), "っつ")
+        kana = kana.replace("tte".toRegex(), "って")
+        kana = kana.replace("tto".toRegex(), "っと")
+        kana = kana.replace("ttya".toRegex(), "っちゃ")
+        kana = kana.replace("ttyi".toRegex(), "っちぃ")
+        kana = kana.replace("ttyu".toRegex(), "っちゅ")
+        kana = kana.replace("ttye".toRegex(), "っちぇ")
+        kana = kana.replace("ttyo".toRegex(), "っちょ")
+        kana = kana.replace("ttha".toRegex(), "ってゃ")
+        kana = kana.replace("tthi".toRegex(), "ってぃ")
+        kana = kana.replace("tthu".toRegex(), "ってゅ")
+        kana = kana.replace("tthe".toRegex(), "ってぇ")
+        kana = kana.replace("ttho".toRegex(), "ってょ")
+        kana = kana.replace("ccya".toRegex(), "っちゃ")
+        kana = kana.replace("ccyi".toRegex(), "っちぃ")
+        kana = kana.replace("ccyu".toRegex(), "っちゅ")
+        kana = kana.replace("ccye".toRegex(), "っちぇ")
+        kana = kana.replace("ccyo".toRegex(), "っちょ")
+        kana = kana.replace("ccha".toRegex(), "っちゃ")
+        kana = kana.replace("cchi".toRegex(), "っち")
+        kana = kana.replace("cchu".toRegex(), "っちゅ")
+        kana = kana.replace("cche".toRegex(), "っちぇ")
+        kana = kana.replace("ccho".toRegex(), "っちょ")
+        kana = kana.replace("dda".toRegex(), "っだ")
+        kana = kana.replace("ddi".toRegex(), "っぢ")
+        kana = kana.replace("ddu".toRegex(), "っづ")
+        kana = kana.replace("dde".toRegex(), "っで")
+        kana = kana.replace("ddo".toRegex(), "っど")
+        kana = kana.replace("ddya".toRegex(), "っぢゃ")
+        kana = kana.replace("ddyi".toRegex(), "っぢぃ")
+        kana = kana.replace("ddyu".toRegex(), "っぢゅ")
+        kana = kana.replace("ddye".toRegex(), "っぢぇ")
+        kana = kana.replace("ddyo".toRegex(), "っぢょ")
+        kana = kana.replace("ddha".toRegex(), "っでゃ")
+        kana = kana.replace("ddhi".toRegex(), "っでぃ")
+        kana = kana.replace("ddhu".toRegex(), "っでゅ")
+        kana = kana.replace("ddhe".toRegex(), "っでぇ")
+        kana = kana.replace("ddho".toRegex(), "っでょ")
+        kana = kana.replace("ppha".toRegex(), "っふぁ")
+        kana = kana.replace("pphi".toRegex(), "っふぃ")
+        kana = kana.replace("pphu".toRegex(), "っふ")
+        kana = kana.replace("pphe".toRegex(), "っふぇ")
+        kana = kana.replace("ppho".toRegex(), "っふぉ")
+        kana = kana.replace("hha".toRegex(), "っは")
+        kana = kana.replace("hhi".toRegex(), "っひ")
+        kana = kana.replace("hhu".toRegex(), "っふ")
+        kana = kana.replace("hhe".toRegex(), "っへ")
+        kana = kana.replace("hho".toRegex(), "っほ")
+        kana = kana.replace("hhya".toRegex(), "っひゃ")
+        kana = kana.replace("hhyi".toRegex(), "っひぃ")
+        kana = kana.replace("hhyu".toRegex(), "っひゅ")
+        kana = kana.replace("hhye".toRegex(), "っひぇ")
+        kana = kana.replace("hhyo".toRegex(), "っひょ")
+        kana = kana.replace("ffa".toRegex(), "っふぁ")
+        kana = kana.replace("ffi".toRegex(), "っふぃ")
+        kana = kana.replace("ffu".toRegex(), "っふ")
+        kana = kana.replace("ffe".toRegex(), "っふぇ")
+        kana = kana.replace("ffo".toRegex(), "っふぉ")
+        kana = kana.replace("ppa".toRegex(), "っぱ")
+        kana = kana.replace("ppi".toRegex(), "っぴ")
+        kana = kana.replace("ppu".toRegex(), "っぷ")
+        kana = kana.replace("ppe".toRegex(), "っぺ")
+        kana = kana.replace("ppo".toRegex(), "っぽ")
+        kana = kana.replace("ppya".toRegex(), "っぴゃ")
+        kana = kana.replace("ppyi".toRegex(), "っぴぃ")
+        kana = kana.replace("ppyu".toRegex(), "っぴゅ")
+        kana = kana.replace("ppye".toRegex(), "っぴぇ")
+        kana = kana.replace("ppyo".toRegex(), "っぴょ")
+        kana = kana.replace("bba".toRegex(), "っば")
+        kana = kana.replace("bbi".toRegex(), "っび")
+        kana = kana.replace("bbu".toRegex(), "っぶ")
+        kana = kana.replace("bbe".toRegex(), "っべ")
+        kana = kana.replace("bbo".toRegex(), "っぼ")
+        kana = kana.replace("bbya".toRegex(), "っびゃ")
+        kana = kana.replace("bbyi".toRegex(), "っびぃ")
+        kana = kana.replace("bbyu".toRegex(), "っびゅ")
+        kana = kana.replace("bbye".toRegex(), "っびぇ")
+        kana = kana.replace("bbyo".toRegex(), "っびょ")
+        kana = kana.replace("vva".toRegex(), "っヴァ")
+        kana = kana.replace("vvi".toRegex(), "っヴィ")
+        kana = kana.replace("vvu".toRegex(), "っヴ")
+        kana = kana.replace("vve".toRegex(), "っヴェ")
+        kana = kana.replace("vvo".toRegex(), "っヴォ")
+        kana = kana.replace("vvya".toRegex(), "っヴャ")
+        kana = kana.replace("vvyu".toRegex(), "っヴュ")
+        kana = kana.replace("vvyo".toRegex(), "っヴョ")
+        kana = kana.replace("mma".toRegex(), "っま")
+        kana = kana.replace("mmi".toRegex(), "っみ")
+        kana = kana.replace("mmu".toRegex(), "っむ")
+        kana = kana.replace("mme".toRegex(), "っめ")
+        kana = kana.replace("mmo".toRegex(), "っも")
+        kana = kana.replace("mmya".toRegex(), "っみゃ")
+        kana = kana.replace("mmyi".toRegex(), "っみぃ")
+        kana = kana.replace("mmyu".toRegex(), "っみゅ")
+        kana = kana.replace("mmye".toRegex(), "っみぇ")
+        kana = kana.replace("mmyo".toRegex(), "っみょ")
+        kana = kana.replace("rrya".toRegex(), "っりゃ")
+        kana = kana.replace("rryi".toRegex(), "っりぃ")
+        kana = kana.replace("rryu".toRegex(), "っりゅ")
+        kana = kana.replace("rrye".toRegex(), "っりぇ")
+        kana = kana.replace("rryo".toRegex(), "っりょ")
+        kana = kana.replace("yya".toRegex(), "っや")
+        kana = kana.replace("yyu".toRegex(), "っゆ")
+        kana = kana.replace("yye".toRegex(), "っいぇ")
+        kana = kana.replace("yyo".toRegex(), "っよ")
+        kana = kana.replace("rra".toRegex(), "っら")
+        kana = kana.replace("rri".toRegex(), "っり")
+        kana = kana.replace("rru".toRegex(), "っる")
+        kana = kana.replace("rre".toRegex(), "っれ")
+        kana = kana.replace("rro".toRegex(), "っろ")
+        kana = kana.replace("wwa".toRegex(), "っわ")
+        kana = kana.replace("wwi".toRegex(), "っうぃ")
+        kana = kana.replace("wwu".toRegex(), "っう")
+        kana = kana.replace("wwe".toRegex(), "っうぇ")
+        kana = kana.replace("wwo".toRegex(), "っを")
+        kana = kana.replace("wha".toRegex(), "うぁ")
+        kana = kana.replace("whi".toRegex(), "うぃ")
+        kana = kana.replace("whu".toRegex(), "う")
+        kana = kana.replace("whe".toRegex(), "うぇ")
+        kana = kana.replace("who".toRegex(), "うぉ")
+        kana = kana.replace("wyi".toRegex(), "ゐ")
+        kana = kana.replace("wye".toRegex(), "ゑ")
+        kana = kana.replace("xa".toRegex(), "ぁ")
+        kana = kana.replace("xi".toRegex(), "ぃ")
+        kana = kana.replace("xu".toRegex(), "ぅ")
+        kana = kana.replace("xe".toRegex(), "ぇ")
+        kana = kana.replace("xo".toRegex(), "ぉ")
+        kana = kana.replace("xya".toRegex(), "ゃ")
+        kana = kana.replace("xyu".toRegex(), "ゅ")
+        kana = kana.replace("xyo".toRegex(), "ょ")
+        kana = kana.replace("xtu".toRegex(), "っ")
+        kana = kana.replace("la".toRegex(), "ぁ")
+        kana = kana.replace("li".toRegex(), "ぃ")
+        kana = kana.replace("lu".toRegex(), "ぅ")
+        kana = kana.replace("le".toRegex(), "ぇ")
+        kana = kana.replace("lo".toRegex(), "ぉ")
+        kana = kana.replace("lya".toRegex(), "ゃ")
+        kana = kana.replace("lyu".toRegex(), "ゅ")
+        kana = kana.replace("lyo".toRegex(), "ょ")
+        kana = kana.replace("ltu".toRegex(), "っ")
+        kana = kana.replace("ka".toRegex(), "か")
+        kana = kana.replace("ki".toRegex(), "き")
+        kana = kana.replace("ku".toRegex(), "く")
+        kana = kana.replace("ke".toRegex(), "け")
+        kana = kana.replace("ko".toRegex(), "こ")
+        kana = kana.replace("kya".toRegex(), "きゃ")
+        kana = kana.replace("kyi".toRegex(), "きぃ")
+        kana = kana.replace("kyu".toRegex(), "きゅ")
+        kana = kana.replace("kye".toRegex(), "きぇ")
+        kana = kana.replace("kyo".toRegex(), "きょ")
+        kana = kana.replace("ga".toRegex(), "が")
+        kana = kana.replace("gi".toRegex(), "ぎ")
+        kana = kana.replace("gu".toRegex(), "ぐ")
+        kana = kana.replace("ge".toRegex(), "げ")
+        kana = kana.replace("go".toRegex(), "ご")
+        kana = kana.replace("gya".toRegex(), "ぎゃ")
+        kana = kana.replace("gyi".toRegex(), "ぎぃ")
+        kana = kana.replace("gyu".toRegex(), "ぎゅ")
+        kana = kana.replace("gye".toRegex(), "ぎぇ")
+        kana = kana.replace("gyo".toRegex(), "ぎょ")
+        kana = kana.replace("tsa".toRegex(), "つぁ")
+        kana = kana.replace("tsi".toRegex(), "つぃ")
+        kana = kana.replace("tsu".toRegex(), "つ")
+        kana = kana.replace("tse".toRegex(), "つぇ")
+        kana = kana.replace("tso".toRegex(), "つぉ")
+        kana = kana.replace("sa".toRegex(), "さ")
+        kana = kana.replace("si".toRegex(), "し")
+        kana = kana.replace("su".toRegex(), "す")
+        kana = kana.replace("se".toRegex(), "せ")
+        kana = kana.replace("so".toRegex(), "そ")
+        kana = kana.replace("ca".toRegex(), "か")
+        kana = kana.replace("ci".toRegex(), "し")
+        kana = kana.replace("cu".toRegex(), "く")
+        kana = kana.replace("ce".toRegex(), "せ")
+        kana = kana.replace("co".toRegex(), "こ")
+        kana = kana.replace("sha".toRegex(), "しゃ")
+        kana = kana.replace("shi".toRegex(), "し")
+        kana = kana.replace("shu".toRegex(), "しゅ")
+        kana = kana.replace("she".toRegex(), "しぇ")
+        kana = kana.replace("sho".toRegex(), "しょ")
+        kana = kana.replace("sya".toRegex(), "しゃ")
+        kana = kana.replace("syi".toRegex(), "しぃ")
+        kana = kana.replace("syu".toRegex(), "しゅ")
+        kana = kana.replace("sye".toRegex(), "しぇ")
+        kana = kana.replace("syo".toRegex(), "しょ")
+        kana = kana.replace("za".toRegex(), "ざ")
+        kana = kana.replace("zi".toRegex(), "じ")
+        kana = kana.replace("zu".toRegex(), "ず")
+        kana = kana.replace("ze".toRegex(), "ぜ")
+        kana = kana.replace("zo".toRegex(), "ぞ")
+        kana = kana.replace("ja".toRegex(), "じゃ")
+        kana = kana.replace("ji".toRegex(), "じ")
+        kana = kana.replace("ju".toRegex(), "じゅ")
+        kana = kana.replace("je".toRegex(), "じぇ")
+        kana = kana.replace("jo".toRegex(), "じょ")
+        kana = kana.replace("jya".toRegex(), "じゃ")
+        kana = kana.replace("jyi".toRegex(), "じぃ")
+        kana = kana.replace("jyu".toRegex(), "じゅ")
+        kana = kana.replace("jye".toRegex(), "じぇ")
+        kana = kana.replace("jyo".toRegex(), "じょ")
+        kana = kana.replace("zya".toRegex(), "じゃ")
+        kana = kana.replace("zyi".toRegex(), "じぃ")
+        kana = kana.replace("zyu".toRegex(), "じゅ")
+        kana = kana.replace("zye".toRegex(), "じぇ")
+        kana = kana.replace("zyo".toRegex(), "じょ")
+        kana = kana.replace("ta".toRegex(), "た")
+        kana = kana.replace("ti".toRegex(), "ち")
+        kana = kana.replace("tu".toRegex(), "つ")
+        kana = kana.replace("te".toRegex(), "て")
+        kana = kana.replace("to".toRegex(), "と")
+        kana = kana.replace("tya".toRegex(), "ちゃ")
+        kana = kana.replace("tyi".toRegex(), "ちぃ")
+        kana = kana.replace("tyu".toRegex(), "ちゅ")
+        kana = kana.replace("tye".toRegex(), "ちぇ")
+        kana = kana.replace("tyo".toRegex(), "ちょ")
+        kana = kana.replace("tha".toRegex(), "てゃ")
+        kana = kana.replace("thi".toRegex(), "てぃ")
+        kana = kana.replace("thu".toRegex(), "てゅ")
+        kana = kana.replace("the".toRegex(), "てぇ")
+        kana = kana.replace("tho".toRegex(), "てょ")
+        kana = kana.replace("cya".toRegex(), "ちゃ")
+        kana = kana.replace("cyi".toRegex(), "ちぃ")
+        kana = kana.replace("cyu".toRegex(), "ちゅ")
+        kana = kana.replace("cye".toRegex(), "ちぇ")
+        kana = kana.replace("cyo".toRegex(), "ちょ")
+        kana = kana.replace("cha".toRegex(), "ちゃ")
+        kana = kana.replace("chi".toRegex(), "ち")
+        kana = kana.replace("chu".toRegex(), "ちゅ")
+        kana = kana.replace("che".toRegex(), "ちぇ")
+        kana = kana.replace("cho".toRegex(), "ちょ")
+        kana = kana.replace("da".toRegex(), "だ")
+        kana = kana.replace("di".toRegex(), "ぢ")
+        kana = kana.replace("du".toRegex(), "づ")
+        kana = kana.replace("de".toRegex(), "で")
+        kana = kana.replace("do".toRegex(), "ど")
+        kana = kana.replace("dya".toRegex(), "ぢゃ")
+        kana = kana.replace("dyi".toRegex(), "ぢぃ")
+        kana = kana.replace("dyu".toRegex(), "ぢゅ")
+        kana = kana.replace("dye".toRegex(), "ぢぇ")
+        kana = kana.replace("dyo".toRegex(), "ぢょ")
+        kana = kana.replace("dha".toRegex(), "でゃ")
+        kana = kana.replace("dhi".toRegex(), "でぃ")
+        kana = kana.replace("dhu".toRegex(), "でゅ")
+        kana = kana.replace("dhe".toRegex(), "でぇ")
+        kana = kana.replace("dho".toRegex(), "でょ")
+        kana = kana.replace("na".toRegex(), "な")
+        kana = kana.replace("ni".toRegex(), "に")
+        kana = kana.replace("nu".toRegex(), "ぬ")
+        kana = kana.replace("ne".toRegex(), "ね")
+        kana = kana.replace("no".toRegex(), "の")
+        kana = kana.replace("nya".toRegex(), "にゃ")
+        kana = kana.replace("nyi".toRegex(), "にぃ")
+        kana = kana.replace("nyu".toRegex(), "にゅ")
+        kana = kana.replace("nye".toRegex(), "にぇ")
+        kana = kana.replace("nyo".toRegex(), "にょ")
+        kana = kana.replace("pha".toRegex(), "ふぁ")
+        kana = kana.replace("phi".toRegex(), "ふぃ")
+        kana = kana.replace("phu".toRegex(), "ふ")
+        kana = kana.replace("phe".toRegex(), "ふぇ")
+        kana = kana.replace("pho".toRegex(), "ふぉ")
+        kana = kana.replace("ha".toRegex(), "は")
+        kana = kana.replace("hi".toRegex(), "ひ")
+        kana = kana.replace("hu".toRegex(), "ふ")
+        kana = kana.replace("he".toRegex(), "へ")
+        kana = kana.replace("ho".toRegex(), "ほ")
+        kana = kana.replace("hya".toRegex(), "ひゃ")
+        kana = kana.replace("hyi".toRegex(), "ひぃ")
+        kana = kana.replace("hyu".toRegex(), "ひゅ")
+        kana = kana.replace("hye".toRegex(), "ひぇ")
+        kana = kana.replace("hyo".toRegex(), "ひょ")
+        kana = kana.replace("fa".toRegex(), "ふぁ")
+        kana = kana.replace("fi".toRegex(), "ふぃ")
+        kana = kana.replace("fu".toRegex(), "ふ")
+        kana = kana.replace("fe".toRegex(), "ふぇ")
+        kana = kana.replace("fo".toRegex(), "ふぉ")
+        kana = kana.replace("fya".toRegex(), "ふゃ")
+        kana = kana.replace("fyi".toRegex(), "ふぃ")
+        kana = kana.replace("fyu".toRegex(), "ふゅ")
+        kana = kana.replace("fye".toRegex(), "ふぇ")
+        kana = kana.replace("fyo".toRegex(), "ふょ")
+        kana = kana.replace("pa".toRegex(), "ぱ")
+        kana = kana.replace("pi".toRegex(), "ぴ")
+        kana = kana.replace("pu".toRegex(), "ぷ")
+        kana = kana.replace("pe".toRegex(), "ぺ")
+        kana = kana.replace("po".toRegex(), "ぽ")
+        kana = kana.replace("pya".toRegex(), "ぴゃ")
+        kana = kana.replace("pyi".toRegex(), "ぴぃ")
+        kana = kana.replace("pyu".toRegex(), "ぴゅ")
+        kana = kana.replace("pye".toRegex(), "ぴぇ")
+        kana = kana.replace("pyo".toRegex(), "ぴょ")
+        kana = kana.replace("ba".toRegex(), "ば")
+        kana = kana.replace("bi".toRegex(), "び")
+        kana = kana.replace("bu".toRegex(), "ぶ")
+        kana = kana.replace("be".toRegex(), "べ")
+        kana = kana.replace("bo".toRegex(), "ぼ")
+        kana = kana.replace("bya".toRegex(), "びゃ")
+        kana = kana.replace("byi".toRegex(), "びぃ")
+        kana = kana.replace("byu".toRegex(), "びゅ")
+        kana = kana.replace("bye".toRegex(), "びぇ")
+        kana = kana.replace("byo".toRegex(), "びょ")
+        kana = kana.replace("va".toRegex(), "ヴァ")
+        kana = kana.replace("vi".toRegex(), "ヴィ")
+        kana = kana.replace("vu".toRegex(), "ヴ")
+        kana = kana.replace("ve".toRegex(), "ヴェ")
+        kana = kana.replace("vo".toRegex(), "ヴォ")
+        kana = kana.replace("vya".toRegex(), "ヴャ")
+        kana = kana.replace("vyu".toRegex(), "ヴュ")
+        kana = kana.replace("vyo".toRegex(), "ヴョ")
+        kana = kana.replace("ma".toRegex(), "ま")
+        kana = kana.replace("mi".toRegex(), "み")
+        kana = kana.replace("mu".toRegex(), "む")
+        kana = kana.replace("me".toRegex(), "め")
+        kana = kana.replace("mo".toRegex(), "も")
+        kana = kana.replace("mya".toRegex(), "みゃ")
+        kana = kana.replace("myi".toRegex(), "みぃ")
+        kana = kana.replace("myu".toRegex(), "みゅ")
+        kana = kana.replace("mye".toRegex(), "みぇ")
+        kana = kana.replace("myo".toRegex(), "みょ")
+        kana = kana.replace("rya".toRegex(), "りゃ")
+        kana = kana.replace("ryi".toRegex(), "りぃ")
+        kana = kana.replace("ryu".toRegex(), "りゅ")
+        kana = kana.replace("rye".toRegex(), "りぇ")
+        kana = kana.replace("ryo".toRegex(), "りょ")
+        kana = kana.replace("ya".toRegex(), "や")
+        kana = kana.replace("yu".toRegex(), "ゆ")
+        kana = kana.replace("ye".toRegex(), "いぇ")
+        kana = kana.replace("yo".toRegex(), "よ")
+        kana = kana.replace("ra".toRegex(), "ら")
+        kana = kana.replace("ri".toRegex(), "り")
+        kana = kana.replace("ru".toRegex(), "る")
+        kana = kana.replace("re".toRegex(), "れ")
+        kana = kana.replace("ro".toRegex(), "ろ")
+        kana = kana.replace("wa".toRegex(), "わ")
+        kana = kana.replace("wi".toRegex(), "うぃ")
+        kana = kana.replace("wu".toRegex(), "う")
+        kana = kana.replace("we".toRegex(), "うぇ")
+        kana = kana.replace("wo".toRegex(), "を")
+        kana = kana.replace("a".toRegex(), "あ")
+        kana = kana.replace("i".toRegex(), "い")
+        kana = kana.replace("u".toRegex(), "う")
+        kana = kana.replace("e".toRegex(), "え")
+        kana = kana.replace("o".toRegex(), "お")
+        kana = kana.replace("n".toRegex(), "ん")
+        kana = kana.replace("!".toRegex(), "！")
+        kana = kana.replace("\\?".toRegex(), "？")
+        kana = kana.replace("~".toRegex(), "～")
+        kana = kana.replace("-".toRegex(), "ー")
+        kana = kana.replace("\\[".toRegex(), "「")
+        kana = kana.replace("]".toRegex(), "」")
+        kana = kana.replace(",".toRegex(), "、")
+        return kana
     }
 
-    public static String toKana(String msg) {
-        msg = msg.replaceAll("nn", "ん");
-        msg = msg.replaceAll("wwha", "っうぁ");
-        msg = msg.replaceAll("wwhi", "っうぃ");
-        msg = msg.replaceAll("wwhu", "っう");
-        msg = msg.replaceAll("wwhe", "っうぇ");
-        msg = msg.replaceAll("wwho", "っうぉ");
-        msg = msg.replaceAll("wwyi", "っゐ");
-        msg = msg.replaceAll("wwye", "っゑ");
-        msg = msg.replaceAll("xxa", "っぁ");
-        msg = msg.replaceAll("xxi", "っぃ");
-        msg = msg.replaceAll("xxu", "っぅ");
-        msg = msg.replaceAll("xxe", "っぇ");
-        msg = msg.replaceAll("xxo", "っぉ");
-        msg = msg.replaceAll("xxya", "っゃ");
-        msg = msg.replaceAll("xxyu", "っゅ");
-        msg = msg.replaceAll("xxyo", "っょ");
-        msg = msg.replaceAll("xxtu", "っっ");
-        msg = msg.replaceAll("lla", "っぁ");
-        msg = msg.replaceAll("lli", "っぃ");
-        msg = msg.replaceAll("llu", "っぅ");
-        msg = msg.replaceAll("lle", "っぇ");
-        msg = msg.replaceAll("llo", "っぉ");
-        msg = msg.replaceAll("llya", "っゃ");
-        msg = msg.replaceAll("llyu", "っゅ");
-        msg = msg.replaceAll("llyo", "っょ");
-        msg = msg.replaceAll("lltu", "っっ");
-        msg = msg.replaceAll("kka", "っか");
-        msg = msg.replaceAll("kki", "っき");
-        msg = msg.replaceAll("kku", "っく");
-        msg = msg.replaceAll("kke", "っけ");
-        msg = msg.replaceAll("kko", "っこ");
-        msg = msg.replaceAll("kkya", "っきゃ");
-        msg = msg.replaceAll("kkyi", "っきぃ");
-        msg = msg.replaceAll("kkyu", "っきゅ");
-        msg = msg.replaceAll("kkye", "っきぇ");
-        msg = msg.replaceAll("kkyo", "っきょ");
-        msg = msg.replaceAll("gga", "っが");
-        msg = msg.replaceAll("ggi", "っぎ");
-        msg = msg.replaceAll("ggu", "っぐ");
-        msg = msg.replaceAll("gge", "っげ");
-        msg = msg.replaceAll("ggo", "っご");
-        msg = msg.replaceAll("ggya", "っぎゃ");
-        msg = msg.replaceAll("ggyi", "っぎぃ");
-        msg = msg.replaceAll("ggyu", "っぎゅ");
-        msg = msg.replaceAll("ggye", "っぎぇ");
-        msg = msg.replaceAll("ggyo", "っぎょ");
-        msg = msg.replaceAll("ttsa", "っつぁ");
-        msg = msg.replaceAll("ttsi", "っつぃ");
-        msg = msg.replaceAll("ttsu", "っつ");
-        msg = msg.replaceAll("ttse", "っつぇ");
-        msg = msg.replaceAll("ttso", "っつぉ");
-        msg = msg.replaceAll("ssa", "っさ");
-        msg = msg.replaceAll("ssi", "っし");
-        msg = msg.replaceAll("ssu", "っす");
-        msg = msg.replaceAll("sse", "っせ");
-        msg = msg.replaceAll("sso", "っそ");
-        msg = msg.replaceAll("cca", "っか");
-        msg = msg.replaceAll("cci", "っし");
-        msg = msg.replaceAll("ccu", "っく");
-        msg = msg.replaceAll("cce", "っせ");
-        msg = msg.replaceAll("cco", "っこ");
-        msg = msg.replaceAll("ssha", "っしゃ");
-        msg = msg.replaceAll("sshi", "っし");
-        msg = msg.replaceAll("sshu", "っしゅ");
-        msg = msg.replaceAll("sshe", "っしぇ");
-        msg = msg.replaceAll("ssho", "っしょ");
-        msg = msg.replaceAll("ssya", "っしゃ");
-        msg = msg.replaceAll("ssyi", "っしぃ");
-        msg = msg.replaceAll("ssyu", "っしゅ");
-        msg = msg.replaceAll("ssye", "っしぇ");
-        msg = msg.replaceAll("ssyo", "っしょ");
-        msg = msg.replaceAll("zza", "っざ");
-        msg = msg.replaceAll("zzi", "っじ");
-        msg = msg.replaceAll("zzu", "っず");
-        msg = msg.replaceAll("zze", "っぜ");
-        msg = msg.replaceAll("zzo", "っぞ");
-        msg = msg.replaceAll("jja", "っじゃ");
-        msg = msg.replaceAll("jji", "っじ");
-        msg = msg.replaceAll("jju", "っじゅ");
-        msg = msg.replaceAll("jje", "っじぇ");
-        msg = msg.replaceAll("jjo", "っじょ");
-        msg = msg.replaceAll("jjya", "っじゃ");
-        msg = msg.replaceAll("jjyi", "っじぃ");
-        msg = msg.replaceAll("jjyu", "っじゅ");
-        msg = msg.replaceAll("jjye", "っじぇ");
-        msg = msg.replaceAll("jjyo", "っじょ");
-        msg = msg.replaceAll("zzya", "っじゃ");
-        msg = msg.replaceAll("zzyi", "っじぃ");
-        msg = msg.replaceAll("zzyu", "っじゅ");
-        msg = msg.replaceAll("zzye", "っじぇ");
-        msg = msg.replaceAll("zzyo", "っじょ");
-        msg = msg.replaceAll("tta", "った");
-        msg = msg.replaceAll("tti", "っち");
-        msg = msg.replaceAll("ttu", "っつ");
-        msg = msg.replaceAll("tte", "って");
-        msg = msg.replaceAll("tto", "っと");
-        msg = msg.replaceAll("ttya", "っちゃ");
-        msg = msg.replaceAll("ttyi", "っちぃ");
-        msg = msg.replaceAll("ttyu", "っちゅ");
-        msg = msg.replaceAll("ttye", "っちぇ");
-        msg = msg.replaceAll("ttyo", "っちょ");
-        msg = msg.replaceAll("ttha", "ってゃ");
-        msg = msg.replaceAll("tthi", "ってぃ");
-        msg = msg.replaceAll("tthu", "ってゅ");
-        msg = msg.replaceAll("tthe", "ってぇ");
-        msg = msg.replaceAll("ttho", "ってょ");
-        msg = msg.replaceAll("ccya", "っちゃ");
-        msg = msg.replaceAll("ccyi", "っちぃ");
-        msg = msg.replaceAll("ccyu", "っちゅ");
-        msg = msg.replaceAll("ccye", "っちぇ");
-        msg = msg.replaceAll("ccyo", "っちょ");
-        msg = msg.replaceAll("ccha", "っちゃ");
-        msg = msg.replaceAll("cchi", "っち");
-        msg = msg.replaceAll("cchu", "っちゅ");
-        msg = msg.replaceAll("cche", "っちぇ");
-        msg = msg.replaceAll("ccho", "っちょ");
-        msg = msg.replaceAll("dda", "っだ");
-        msg = msg.replaceAll("ddi", "っぢ");
-        msg = msg.replaceAll("ddu", "っづ");
-        msg = msg.replaceAll("dde", "っで");
-        msg = msg.replaceAll("ddo", "っど");
-        msg = msg.replaceAll("ddya", "っぢゃ");
-        msg = msg.replaceAll("ddyi", "っぢぃ");
-        msg = msg.replaceAll("ddyu", "っぢゅ");
-        msg = msg.replaceAll("ddye", "っぢぇ");
-        msg = msg.replaceAll("ddyo", "っぢょ");
-        msg = msg.replaceAll("ddha", "っでゃ");
-        msg = msg.replaceAll("ddhi", "っでぃ");
-        msg = msg.replaceAll("ddhu", "っでゅ");
-        msg = msg.replaceAll("ddhe", "っでぇ");
-        msg = msg.replaceAll("ddho", "っでょ");
-        msg = msg.replaceAll("ppha", "っふぁ");
-        msg = msg.replaceAll("pphi", "っふぃ");
-        msg = msg.replaceAll("pphu", "っふ");
-        msg = msg.replaceAll("pphe", "っふぇ");
-        msg = msg.replaceAll("ppho", "っふぉ");
-        msg = msg.replaceAll("hha", "っは");
-        msg = msg.replaceAll("hhi", "っひ");
-        msg = msg.replaceAll("hhu", "っふ");
-        msg = msg.replaceAll("hhe", "っへ");
-        msg = msg.replaceAll("hho", "っほ");
-        msg = msg.replaceAll("hhya", "っひゃ");
-        msg = msg.replaceAll("hhyi", "っひぃ");
-        msg = msg.replaceAll("hhyu", "っひゅ");
-        msg = msg.replaceAll("hhye", "っひぇ");
-        msg = msg.replaceAll("hhyo", "っひょ");
-        msg = msg.replaceAll("ffa", "っふぁ");
-        msg = msg.replaceAll("ffi", "っふぃ");
-        msg = msg.replaceAll("ffu", "っふ");
-        msg = msg.replaceAll("ffe", "っふぇ");
-        msg = msg.replaceAll("ffo", "っふぉ");
-        msg = msg.replaceAll("ppa", "っぱ");
-        msg = msg.replaceAll("ppi", "っぴ");
-        msg = msg.replaceAll("ppu", "っぷ");
-        msg = msg.replaceAll("ppe", "っぺ");
-        msg = msg.replaceAll("ppo", "っぽ");
-        msg = msg.replaceAll("ppya", "っぴゃ");
-        msg = msg.replaceAll("ppyi", "っぴぃ");
-        msg = msg.replaceAll("ppyu", "っぴゅ");
-        msg = msg.replaceAll("ppye", "っぴぇ");
-        msg = msg.replaceAll("ppyo", "っぴょ");
-        msg = msg.replaceAll("bba", "っば");
-        msg = msg.replaceAll("bbi", "っび");
-        msg = msg.replaceAll("bbu", "っぶ");
-        msg = msg.replaceAll("bbe", "っべ");
-        msg = msg.replaceAll("bbo", "っぼ");
-        msg = msg.replaceAll("bbya", "っびゃ");
-        msg = msg.replaceAll("bbyi", "っびぃ");
-        msg = msg.replaceAll("bbyu", "っびゅ");
-        msg = msg.replaceAll("bbye", "っびぇ");
-        msg = msg.replaceAll("bbyo", "っびょ");
-        msg = msg.replaceAll("vva", "っヴァ");
-        msg = msg.replaceAll("vvi", "っヴィ");
-        msg = msg.replaceAll("vvu", "っヴ");
-        msg = msg.replaceAll("vve", "っヴェ");
-        msg = msg.replaceAll("vvo", "っヴォ");
-        msg = msg.replaceAll("vvya", "っヴャ");
-        msg = msg.replaceAll("vvyu", "っヴュ");
-        msg = msg.replaceAll("vvyo", "っヴョ");
-        msg = msg.replaceAll("mma", "っま");
-        msg = msg.replaceAll("mmi", "っみ");
-        msg = msg.replaceAll("mmu", "っむ");
-        msg = msg.replaceAll("mme", "っめ");
-        msg = msg.replaceAll("mmo", "っも");
-        msg = msg.replaceAll("mmya", "っみゃ");
-        msg = msg.replaceAll("mmyi", "っみぃ");
-        msg = msg.replaceAll("mmyu", "っみゅ");
-        msg = msg.replaceAll("mmye", "っみぇ");
-        msg = msg.replaceAll("mmyo", "っみょ");
-        msg = msg.replaceAll("rrya", "っりゃ");
-        msg = msg.replaceAll("rryi", "っりぃ");
-        msg = msg.replaceAll("rryu", "っりゅ");
-        msg = msg.replaceAll("rrye", "っりぇ");
-        msg = msg.replaceAll("rryo", "っりょ");
-        msg = msg.replaceAll("yya", "っや");
-        msg = msg.replaceAll("yyu", "っゆ");
-        msg = msg.replaceAll("yye", "っいぇ");
-        msg = msg.replaceAll("yyo", "っよ");
-        msg = msg.replaceAll("rra", "っら");
-        msg = msg.replaceAll("rri", "っり");
-        msg = msg.replaceAll("rru", "っる");
-        msg = msg.replaceAll("rre", "っれ");
-        msg = msg.replaceAll("rro", "っろ");
-        msg = msg.replaceAll("wwa", "っわ");
-        msg = msg.replaceAll("wwi", "っうぃ");
-        msg = msg.replaceAll("wwu", "っう");
-        msg = msg.replaceAll("wwe", "っうぇ");
-        msg = msg.replaceAll("wwo", "っを");
-        msg = msg.replaceAll("wha", "うぁ");
-        msg = msg.replaceAll("whi", "うぃ");
-        msg = msg.replaceAll("whu", "う");
-        msg = msg.replaceAll("whe", "うぇ");
-        msg = msg.replaceAll("who", "うぉ");
-        msg = msg.replaceAll("wyi", "ゐ");
-        msg = msg.replaceAll("wye", "ゑ");
-        msg = msg.replaceAll("xa", "ぁ");
-        msg = msg.replaceAll("xi", "ぃ");
-        msg = msg.replaceAll("xu", "ぅ");
-        msg = msg.replaceAll("xe", "ぇ");
-        msg = msg.replaceAll("xo", "ぉ");
-        msg = msg.replaceAll("xya", "ゃ");
-        msg = msg.replaceAll("xyu", "ゅ");
-        msg = msg.replaceAll("xyo", "ょ");
-        msg = msg.replaceAll("xtu", "っ");
-        msg = msg.replaceAll("la", "ぁ");
-        msg = msg.replaceAll("li", "ぃ");
-        msg = msg.replaceAll("lu", "ぅ");
-        msg = msg.replaceAll("le", "ぇ");
-        msg = msg.replaceAll("lo", "ぉ");
-        msg = msg.replaceAll("lya", "ゃ");
-        msg = msg.replaceAll("lyu", "ゅ");
-        msg = msg.replaceAll("lyo", "ょ");
-        msg = msg.replaceAll("ltu", "っ");
-        msg = msg.replaceAll("ka", "か");
-        msg = msg.replaceAll("ki", "き");
-        msg = msg.replaceAll("ku", "く");
-        msg = msg.replaceAll("ke", "け");
-        msg = msg.replaceAll("ko", "こ");
-        msg = msg.replaceAll("kya", "きゃ");
-        msg = msg.replaceAll("kyi", "きぃ");
-        msg = msg.replaceAll("kyu", "きゅ");
-        msg = msg.replaceAll("kye", "きぇ");
-        msg = msg.replaceAll("kyo", "きょ");
-        msg = msg.replaceAll("ga", "が");
-        msg = msg.replaceAll("gi", "ぎ");
-        msg = msg.replaceAll("gu", "ぐ");
-        msg = msg.replaceAll("ge", "げ");
-        msg = msg.replaceAll("go", "ご");
-        msg = msg.replaceAll("gya", "ぎゃ");
-        msg = msg.replaceAll("gyi", "ぎぃ");
-        msg = msg.replaceAll("gyu", "ぎゅ");
-        msg = msg.replaceAll("gye", "ぎぇ");
-        msg = msg.replaceAll("gyo", "ぎょ");
-        msg = msg.replaceAll("tsa", "つぁ");
-        msg = msg.replaceAll("tsi", "つぃ");
-        msg = msg.replaceAll("tsu", "つ");
-        msg = msg.replaceAll("tse", "つぇ");
-        msg = msg.replaceAll("tso", "つぉ");
-        msg = msg.replaceAll("sa", "さ");
-        msg = msg.replaceAll("si", "し");
-        msg = msg.replaceAll("su", "す");
-        msg = msg.replaceAll("se", "せ");
-        msg = msg.replaceAll("so", "そ");
-        msg = msg.replaceAll("ca", "か");
-        msg = msg.replaceAll("ci", "し");
-        msg = msg.replaceAll("cu", "く");
-        msg = msg.replaceAll("ce", "せ");
-        msg = msg.replaceAll("co", "こ");
-        msg = msg.replaceAll("sha", "しゃ");
-        msg = msg.replaceAll("shi", "し");
-        msg = msg.replaceAll("shu", "しゅ");
-        msg = msg.replaceAll("she", "しぇ");
-        msg = msg.replaceAll("sho", "しょ");
-        msg = msg.replaceAll("sya", "しゃ");
-        msg = msg.replaceAll("syi", "しぃ");
-        msg = msg.replaceAll("syu", "しゅ");
-        msg = msg.replaceAll("sye", "しぇ");
-        msg = msg.replaceAll("syo", "しょ");
-        msg = msg.replaceAll("za", "ざ");
-        msg = msg.replaceAll("zi", "じ");
-        msg = msg.replaceAll("zu", "ず");
-        msg = msg.replaceAll("ze", "ぜ");
-        msg = msg.replaceAll("zo", "ぞ");
-        msg = msg.replaceAll("ja", "じゃ");
-        msg = msg.replaceAll("ji", "じ");
-        msg = msg.replaceAll("ju", "じゅ");
-        msg = msg.replaceAll("je", "じぇ");
-        msg = msg.replaceAll("jo", "じょ");
-        msg = msg.replaceAll("jya", "じゃ");
-        msg = msg.replaceAll("jyi", "じぃ");
-        msg = msg.replaceAll("jyu", "じゅ");
-        msg = msg.replaceAll("jye", "じぇ");
-        msg = msg.replaceAll("jyo", "じょ");
-        msg = msg.replaceAll("zya", "じゃ");
-        msg = msg.replaceAll("zyi", "じぃ");
-        msg = msg.replaceAll("zyu", "じゅ");
-        msg = msg.replaceAll("zye", "じぇ");
-        msg = msg.replaceAll("zyo", "じょ");
-        msg = msg.replaceAll("ta", "た");
-        msg = msg.replaceAll("ti", "ち");
-        msg = msg.replaceAll("tu", "つ");
-        msg = msg.replaceAll("te", "て");
-        msg = msg.replaceAll("to", "と");
-        msg = msg.replaceAll("tya", "ちゃ");
-        msg = msg.replaceAll("tyi", "ちぃ");
-        msg = msg.replaceAll("tyu", "ちゅ");
-        msg = msg.replaceAll("tye", "ちぇ");
-        msg = msg.replaceAll("tyo", "ちょ");
-        msg = msg.replaceAll("tha", "てゃ");
-        msg = msg.replaceAll("thi", "てぃ");
-        msg = msg.replaceAll("thu", "てゅ");
-        msg = msg.replaceAll("the", "てぇ");
-        msg = msg.replaceAll("tho", "てょ");
-        msg = msg.replaceAll("cya", "ちゃ");
-        msg = msg.replaceAll("cyi", "ちぃ");
-        msg = msg.replaceAll("cyu", "ちゅ");
-        msg = msg.replaceAll("cye", "ちぇ");
-        msg = msg.replaceAll("cyo", "ちょ");
-        msg = msg.replaceAll("cha", "ちゃ");
-        msg = msg.replaceAll("chi", "ち");
-        msg = msg.replaceAll("chu", "ちゅ");
-        msg = msg.replaceAll("che", "ちぇ");
-        msg = msg.replaceAll("cho", "ちょ");
-        msg = msg.replaceAll("da", "だ");
-        msg = msg.replaceAll("di", "ぢ");
-        msg = msg.replaceAll("du", "づ");
-        msg = msg.replaceAll("de", "で");
-        msg = msg.replaceAll("do", "ど");
-        msg = msg.replaceAll("dya", "ぢゃ");
-        msg = msg.replaceAll("dyi", "ぢぃ");
-        msg = msg.replaceAll("dyu", "ぢゅ");
-        msg = msg.replaceAll("dye", "ぢぇ");
-        msg = msg.replaceAll("dyo", "ぢょ");
-        msg = msg.replaceAll("dha", "でゃ");
-        msg = msg.replaceAll("dhi", "でぃ");
-        msg = msg.replaceAll("dhu", "でゅ");
-        msg = msg.replaceAll("dhe", "でぇ");
-        msg = msg.replaceAll("dho", "でょ");
-        msg = msg.replaceAll("na", "な");
-        msg = msg.replaceAll("ni", "に");
-        msg = msg.replaceAll("nu", "ぬ");
-        msg = msg.replaceAll("ne", "ね");
-        msg = msg.replaceAll("no", "の");
-        msg = msg.replaceAll("nya", "にゃ");
-        msg = msg.replaceAll("nyi", "にぃ");
-        msg = msg.replaceAll("nyu", "にゅ");
-        msg = msg.replaceAll("nye", "にぇ");
-        msg = msg.replaceAll("nyo", "にょ");
-        msg = msg.replaceAll("pha", "ふぁ");
-        msg = msg.replaceAll("phi", "ふぃ");
-        msg = msg.replaceAll("phu", "ふ");
-        msg = msg.replaceAll("phe", "ふぇ");
-        msg = msg.replaceAll("pho", "ふぉ");
-        msg = msg.replaceAll("ha", "は");
-        msg = msg.replaceAll("hi", "ひ");
-        msg = msg.replaceAll("hu", "ふ");
-        msg = msg.replaceAll("he", "へ");
-        msg = msg.replaceAll("ho", "ほ");
-        msg = msg.replaceAll("hya", "ひゃ");
-        msg = msg.replaceAll("hyi", "ひぃ");
-        msg = msg.replaceAll("hyu", "ひゅ");
-        msg = msg.replaceAll("hye", "ひぇ");
-        msg = msg.replaceAll("hyo", "ひょ");
-        msg = msg.replaceAll("fa", "ふぁ");
-        msg = msg.replaceAll("fi", "ふぃ");
-        msg = msg.replaceAll("fu", "ふ");
-        msg = msg.replaceAll("fe", "ふぇ");
-        msg = msg.replaceAll("fo", "ふぉ");
-        msg = msg.replaceAll("fya", "ふゃ");
-        msg = msg.replaceAll("fyi", "ふぃ");
-        msg = msg.replaceAll("fyu", "ふゅ");
-        msg = msg.replaceAll("fye", "ふぇ");
-        msg = msg.replaceAll("fyo", "ふょ");
-        msg = msg.replaceAll("pa", "ぱ");
-        msg = msg.replaceAll("pi", "ぴ");
-        msg = msg.replaceAll("pu", "ぷ");
-        msg = msg.replaceAll("pe", "ぺ");
-        msg = msg.replaceAll("po", "ぽ");
-        msg = msg.replaceAll("pya", "ぴゃ");
-        msg = msg.replaceAll("pyi", "ぴぃ");
-        msg = msg.replaceAll("pyu", "ぴゅ");
-        msg = msg.replaceAll("pye", "ぴぇ");
-        msg = msg.replaceAll("pyo", "ぴょ");
-        msg = msg.replaceAll("ba", "ば");
-        msg = msg.replaceAll("bi", "び");
-        msg = msg.replaceAll("bu", "ぶ");
-        msg = msg.replaceAll("be", "べ");
-        msg = msg.replaceAll("bo", "ぼ");
-        msg = msg.replaceAll("bya", "びゃ");
-        msg = msg.replaceAll("byi", "びぃ");
-        msg = msg.replaceAll("byu", "びゅ");
-        msg = msg.replaceAll("bye", "びぇ");
-        msg = msg.replaceAll("byo", "びょ");
-        msg = msg.replaceAll("va", "ヴァ");
-        msg = msg.replaceAll("vi", "ヴィ");
-        msg = msg.replaceAll("vu", "ヴ");
-        msg = msg.replaceAll("ve", "ヴェ");
-        msg = msg.replaceAll("vo", "ヴォ");
-        msg = msg.replaceAll("vya", "ヴャ");
-        msg = msg.replaceAll("vyu", "ヴュ");
-        msg = msg.replaceAll("vyo", "ヴョ");
-        msg = msg.replaceAll("ma", "ま");
-        msg = msg.replaceAll("mi", "み");
-        msg = msg.replaceAll("mu", "む");
-        msg = msg.replaceAll("me", "め");
-        msg = msg.replaceAll("mo", "も");
-        msg = msg.replaceAll("mya", "みゃ");
-        msg = msg.replaceAll("myi", "みぃ");
-        msg = msg.replaceAll("myu", "みゅ");
-        msg = msg.replaceAll("mye", "みぇ");
-        msg = msg.replaceAll("myo", "みょ");
-        msg = msg.replaceAll("rya", "りゃ");
-        msg = msg.replaceAll("ryi", "りぃ");
-        msg = msg.replaceAll("ryu", "りゅ");
-        msg = msg.replaceAll("rye", "りぇ");
-        msg = msg.replaceAll("ryo", "りょ");
-        msg = msg.replaceAll("ya", "や");
-        msg = msg.replaceAll("yu", "ゆ");
-        msg = msg.replaceAll("ye", "いぇ");
-        msg = msg.replaceAll("yo", "よ");
-        msg = msg.replaceAll("ra", "ら");
-        msg = msg.replaceAll("ri", "り");
-        msg = msg.replaceAll("ru", "る");
-        msg = msg.replaceAll("re", "れ");
-        msg = msg.replaceAll("ro", "ろ");
-        msg = msg.replaceAll("wa", "わ");
-        msg = msg.replaceAll("wi", "うぃ");
-        msg = msg.replaceAll("wu", "う");
-        msg = msg.replaceAll("we", "うぇ");
-        msg = msg.replaceAll("wo", "を");
-        msg = msg.replaceAll("a", "あ");
-        msg = msg.replaceAll("i", "い");
-        msg = msg.replaceAll("u", "う");
-        msg = msg.replaceAll("e", "え");
-        msg = msg.replaceAll("o", "お");
-        msg = msg.replaceAll("n", "ん");
-        msg = msg.replaceAll("!", "！");
-        msg = msg.replaceAll("\\?", "？");
-        msg = msg.replaceAll("~", "～");
-        msg = msg.replaceAll("-", "ー");
-        msg = msg.replaceAll("\\[", "「");
-        msg = msg.replaceAll("]", "」");
-        msg = msg.replaceAll(",", "、");
-        return msg;
+    fun convByGoogleIME(org: String): String {
+        return conv(org, true)
     }
 
-    public static String convByGoogleIME(String org) {
-        return conv(org, true);
+    @Deprecated("")
+    fun convBySocialIME(org: String): String {
+        return conv(org, false)
     }
 
-    /** @deprecated */
-    @Deprecated
-    public static String convBySocialIME(String org) {
-        return conv(org, false);
-    }
-
-    private static String conv(String org, boolean isGoogleIME) {
-        if (org.length() != 0) {
-            HttpURLConnection urlconn = null;
-            BufferedReader reader = null;
-
+    private fun conv(org: String, isGoogleIME: Boolean): String {
+        if (org.length != 0) {
+            var urlconn: HttpURLConnection? = null
+            var reader: BufferedReader? = null
             try {
-                String baseurl;
-                String encode;
+                val baseurl: String
+                val encode: String
                 if (isGoogleIME) {
-                    baseurl = "http://www.google.com/transliterate?langpair=ja-Hira|ja&text=" + URLEncoder.encode(org, "UTF-8");
-                    encode = "UTF-8";
+                    baseurl = "http://www.google.com/transliterate?langpair=ja-Hira|ja&text=" + URLEncoder.encode(
+                        org,
+                        "UTF-8"
+                    )
+                    encode = "UTF-8"
                 } else {
-                    baseurl = "http://www.social-ime.com/api/?string=" + URLEncoder.encode(org, "UTF-8");
-                    encode = "EUC_JP";
+                    baseurl = "http://www.social-ime.com/api/?string=" + URLEncoder.encode(org, "UTF-8")
+                    encode = "EUC_JP"
                 }
-
-                URL url = new URL(baseurl);
-                urlconn = (HttpURLConnection) url.openConnection();
-                urlconn.setRequestMethod("GET");
-                urlconn.setInstanceFollowRedirects(false);
-                urlconn.connect();
-                reader = new BufferedReader(new InputStreamReader(urlconn.getInputStream(), encode));
-                String line;
-                StringBuilder result = new StringBuilder();
-
-                while ((line = reader.readLine()) != null) {
+                val url = URL(baseurl)
+                urlconn = url.openConnection() as HttpURLConnection
+                urlconn.requestMethod = "GET"
+                urlconn.instanceFollowRedirects = false
+                urlconn.connect()
+                reader = BufferedReader(InputStreamReader(urlconn.inputStream, encode))
+                var line: String?
+                val result = StringBuilder()
+                while (reader.readLine().also { line = it } != null) {
                     if (isGoogleIME) {
-                        result.append(parseGoogleIMEResult(line));
+                        result.append(parseGoogleIMEResult(line!!))
                     } else {
-                        result.append(pickFirstElement(line));
+                        result.append(pickFirstElement(line!!))
                     }
                 }
-
-                return result.toString();
-            } catch (IOException var24) {
-                var24.printStackTrace();
+                return result.toString()
+            } catch (var24: IOException) {
+                var24.printStackTrace()
             } finally {
-                if (urlconn != null) {
-                    urlconn.disconnect();
-                }
-
+                urlconn?.disconnect()
                 if (reader != null) {
                     try {
-                        reader.close();
-                    } catch (IOException ignored) {
+                        reader.close()
+                    } catch (ignored: IOException) {
                     }
                 }
-
             }
-
         }
-        return "";
+        return ""
     }
 
-    private static String pickFirstElement(String org) {
-        int index = org.indexOf("\t");
-        return index == -1 ? org : org.substring(0, index);
+    private fun pickFirstElement(org: String): String {
+        val index = org.indexOf("\t")
+        return if (index == -1) org else org.substring(0, index)
     }
 
-    private static String parseGoogleIMEResult(String result) {
-        StringBuilder buf = new StringBuilder();
-        int level = 0;
-        int index = 0;
-
-        while(index < result.length()) {
-            int nextStart;
-            int nextEnd;
+    private fun parseGoogleIMEResult(result: String): String {
+        val buf = StringBuilder()
+        var level = 0
+        var index = 0
+        while (index < result.length) {
+            var nextStart: Int
+            var nextEnd: Int
             if (level >= 3) {
-                nextStart = result.indexOf("\"", index);
-                nextEnd = result.indexOf("\"", nextStart + 1);
+                nextStart = result.indexOf("\"", index)
+                nextEnd = result.indexOf("\"", nextStart + 1)
                 if (nextStart == -1 || nextEnd == -1) {
-                    return buf.toString();
+                    return buf.toString()
                 }
-
-                buf.append(result, nextStart + 1, nextEnd);
-                int next = result.indexOf("]", nextEnd);
+                buf.append(result, nextStart + 1, nextEnd)
+                val next = result.indexOf("]", nextEnd)
                 if (next == -1) {
-                    return buf.toString();
+                    return buf.toString()
                 }
-
-                --level;
-                index = next + 1;
+                --level
+                index = next + 1
             } else {
-                nextStart = result.indexOf("[", index);
-                nextEnd = result.indexOf("]", index);
+                nextStart = result.indexOf("[", index)
+                nextEnd = result.indexOf("]", index)
                 if (nextStart == -1) {
-                    return buf.toString();
+                    return buf.toString()
                 }
-
-                if (nextStart < nextEnd) {
-                    ++level;
-                    index = nextStart + 1;
+                index = if (nextStart < nextEnd) {
+                    ++level
+                    nextStart + 1
                 } else {
-                    --level;
-                    index = nextEnd + 1;
+                    --level
+                    nextEnd + 1
                 }
             }
         }
-
-        return buf.toString();
-    }
-
-    private void sendChat(String text) {
-        String[] s = text.split(EnumChatFormatting.WHITE + ": " + EnumChatFormatting.RESET);
-        String msg = String.join(EnumChatFormatting.WHITE + ": " + EnumChatFormatting.RESET, Arrays.copyOfRange(s, 1, s.length));
-        ChatLib.INSTANCE.chat(text + " " + EnumChatFormatting.GOLD + "(" + convByGoogleIME(toKana(msg)) + EnumChatFormatting.GOLD + ")");
-    }
-
-    public void run() {
-        if (this.mode.equals("chat")) {
-            this.sendChat(this.str);
-        }
-
+        return buf.toString()
     }
 }

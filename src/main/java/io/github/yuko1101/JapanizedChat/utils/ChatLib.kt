@@ -2,6 +2,7 @@ package io.github.yuko1101.JapanizedChat.utils
 
 import net.minecraft.client.Minecraft
 import net.minecraft.util.ChatComponentText
+import net.minecraft.util.IChatComponent
 
 object ChatLib {
     private val mc = Minecraft.getMinecraft()
@@ -16,7 +17,8 @@ object ChatLib {
     fun command(text: String) {
         mc.thePlayer.sendChatMessage("/$text")
     }
-    fun chatComponent(component: ChatComponentText) {
+    fun components(components: List<IChatComponent>) {
+        val component = components.reduce { a, b -> a.appendSibling(b) }
         mc.thePlayer.addChatComponentMessage(component)
     }
 }

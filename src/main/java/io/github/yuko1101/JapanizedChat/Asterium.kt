@@ -1,9 +1,12 @@
 package io.github.yuko1101.JapanizedChat
 
 import gg.essential.api.EssentialAPI
+import gg.essential.api.utils.Multithreading
 import io.github.yuko1101.JapanizedChat.commands.MainCommand
+import io.github.yuko1101.JapanizedChat.utils.ChatLib
 import io.github.yuko1101.JapanizedChat.utils.Translate
 import net.minecraft.client.Minecraft
+import net.minecraft.util.ChatComponentText
 import net.minecraft.util.EnumChatFormatting
 import net.minecraftforge.client.event.ClientChatReceivedEvent
 import net.minecraftforge.common.MinecraftForge
@@ -34,7 +37,7 @@ class Asterium {
 
     companion object {
         const val MODID = "JapanizedChat"
-        const val VERSION = "0.1.0"
+        const val VERSION = "0.2.0"
         val config = Config
 
     }
@@ -48,9 +51,17 @@ class Asterium {
                 EnumChatFormatting.RESET.toString() + "" + EnumChatFormatting.BLUE + "Party " + EnumChatFormatting.DARK_GRAY + ">")) {
             if (text.contains("://")) return
             if (!EnumChatFormatting.getTextWithoutFormattingCodes(text).all { c -> c.toString().toByteArray().size <= 1 }) return
-            val chat: Runnable = Translate(text, "chat")
-            Thread(chat).start()
+            val msgStartString = EnumChatFormatting.WHITE.toString() + ": " + EnumChatFormatting.RESET
+            val msgStartIndex = text.indexOf(msgStartString) + msgStartString.length
+            if (msgStartIndex == -1) return
+            val msg = text.substring(msgStartIndex)
             event.isCanceled = true
+            Multithreading.runAsync {
+                val components = event.message.siblings
+                components.add(ChatComponentText(" ${EnumChatFormatting.GOLD}(${Translate.convByGoogleIME(Translate.toKana(msg))}${EnumChatFormatting.GOLD})"))
+                ChatLib.components(components)
+            }
+
         }
     }
 }
