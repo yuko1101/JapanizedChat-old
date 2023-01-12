@@ -1,6 +1,6 @@
 [
 {
-  "modid": "JapanizedChat",
+  "modid": "japanizedchat",
   "name": "JapanizedChat",
   "description": "JapanizedChat for Minecraft Forge 1.8.9",
   "version": "${version}",
@@ -9,7 +9,7 @@
   "updateUrl": "",
   "authorList": ["yuko1101"],
   "credits": "The Forge and FML guys, for making this example",
-  "logoFile": "assets/JapanizedChat/icon.png",
+  "logoFile": "assets/japanizedchat/icon.png",
   "screenshots": [],
   "dependencies": []
 }

@@ -1,4 +1,4 @@
-package io.github.yuko1101.JapanizedChat
+package io.github.yuko1101.japanizedchat
 
 import gg.essential.vigilance.Vigilant
 import gg.essential.vigilance.data.Property

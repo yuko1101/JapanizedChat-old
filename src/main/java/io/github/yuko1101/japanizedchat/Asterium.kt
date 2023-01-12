@@ -1,10 +1,10 @@
-package io.github.yuko1101.JapanizedChat
+package io.github.yuko1101.japanizedchat
 
 import gg.essential.api.EssentialAPI
 import gg.essential.api.utils.Multithreading
-import io.github.yuko1101.JapanizedChat.commands.MainCommand
-import io.github.yuko1101.JapanizedChat.utils.ChatLib
-import io.github.yuko1101.JapanizedChat.utils.Translate
+import io.github.yuko1101.japanizedchat.commands.MainCommand
+import io.github.yuko1101.japanizedchat.utils.ChatLib
+import io.github.yuko1101.japanizedchat.utils.Translate
 import net.minecraft.client.Minecraft
 import net.minecraft.util.ChatComponentText
 import net.minecraft.util.EnumChatFormatting
@@ -36,7 +36,7 @@ class Asterium {
 
 
     companion object {
-        const val MODID = "JapanizedChat"
+        const val MODID = "japanizedchat"
         const val VERSION = "0.2.0"
         val config = Config
 

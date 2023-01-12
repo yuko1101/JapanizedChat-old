@@ -1,6 +1,5 @@
-package io.github.yuko1101.JapanizedChat.utils
+package io.github.yuko1101.japanizedchat.utils
 
-import net.minecraft.util.EnumChatFormatting
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
@@ -469,8 +468,8 @@ object Translate {
     }
 
     private fun conv(org: String, isGoogleIME: Boolean): String {
-        if (org.length != 0) {
-            var urlconn: HttpURLConnection? = null
+        if (org.isNotEmpty()) {
+            var urlConn: HttpURLConnection? = null
             var reader: BufferedReader? = null
             try {
                 val baseurl: String
@@ -486,11 +485,11 @@ object Translate {
                     encode = "EUC_JP"
                 }
                 val url = URL(baseurl)
-                urlconn = url.openConnection() as HttpURLConnection
-                urlconn.requestMethod = "GET"
-                urlconn.instanceFollowRedirects = false
-                urlconn.connect()
-                reader = BufferedReader(InputStreamReader(urlconn.inputStream, encode))
+                urlConn = url.openConnection() as HttpURLConnection
+                urlConn.requestMethod = "GET"
+                urlConn.instanceFollowRedirects = false
+                urlConn.connect()
+                reader = BufferedReader(InputStreamReader(urlConn.inputStream, encode))
                 var line: String?
                 val result = StringBuilder()
                 while (reader.readLine().also { line = it } != null) {
@@ -504,7 +503,7 @@ object Translate {
             } catch (var24: IOException) {
                 var24.printStackTrace()
             } finally {
-                urlconn?.disconnect()
+                urlConn?.disconnect()
                 if (reader != null) {
                     try {
                         reader.close()

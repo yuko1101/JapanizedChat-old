@@ -1,10 +1,10 @@
-package io.github.yuko1101.JapanizedChat.commands
+package io.github.yuko1101.japanizedchat.commands
 
 import gg.essential.api.commands.Command
 import gg.essential.api.commands.DefaultHandler
 import gg.essential.api.commands.SubCommand
 import gg.essential.api.utils.GuiUtil
-import io.github.yuko1101.JapanizedChat.Asterium
+import io.github.yuko1101.japanizedchat.Asterium
 import java.util.*
 
 

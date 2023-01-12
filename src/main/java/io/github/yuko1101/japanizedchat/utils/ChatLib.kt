@@ -1,4 +1,4 @@
-package io.github.yuko1101.JapanizedChat.utils
+package io.github.yuko1101.japanizedchat.utils
 
 import net.minecraft.client.Minecraft
 import net.minecraft.util.ChatComponentText
